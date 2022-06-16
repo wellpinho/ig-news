@@ -1,9 +1,15 @@
-import type { NextPage } from 'next'
+import Head from "next/head";
 
-const Home: NextPage = () => {
+export default function Home() {
   return (
-    <h1>Hello world</h1>
-  )
-}
+    <>
+      <Head>
+        <title>Inicío IG news</title>
+      </Head>
 
-export default Home
+      <h1 className="">
+        Hello <span>world</span>
+      </h1>
+    </>
+  );
+}

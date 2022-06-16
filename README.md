@@ -7,3 +7,4 @@ React and NextJs
 1. ` yarn create next-app --typescript`
 2. `cd projetct-name && yarn dev`
 3. `yarn add @types/react @types/node -D`
+4. `yarn add sass`
