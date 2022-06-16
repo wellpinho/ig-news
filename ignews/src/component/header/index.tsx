@@ -1,3 +1,4 @@
+import { Signin } from "../signin";
 import style from "./styles.module.scss";
 
 export const Header = () => {
@@ -12,6 +13,7 @@ export const Header = () => {
           </a>
           <a href="">Posts</a>
         </nav>
+        <Signin />
       </div>
     </header>
   );
