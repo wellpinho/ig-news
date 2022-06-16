@@ -1,15 +1,27 @@
 import Head from "next/head";
+import style from "./home.module.scss";
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Inicío IG news</title>
+        <title>Home IG news</title>
       </Head>
 
-      <h1 className="">
-        Hello <span>world</span>
-      </h1>
+      <main className={style.container}>
+        <section className={style.hero}>
+          <span>🤝 Hey, Welcome</span>
+          <h1>
+            News about the <span>React</span> world.
+          </h1>
+          <p>
+            Get access to all the publications <br />
+            <span>for $9.90 month</span>
+          </p>
+        </section>
+
+        <img src="/images/avatar.svg" alt="Girl coding" />
+      </main>
     </>
   );
 }
