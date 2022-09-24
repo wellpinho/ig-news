@@ -1,4 +1,14 @@
-import { Create, Collection } from "faunadb";
+import {
+  Create,
+  Collection,
+  If,
+  Not,
+  Exists,
+  Match,
+  Index,
+  Casefold,
+  Get,
+} from "faunadb";
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import faunadb from "../../../services/fauna";
@@ -20,11 +30,17 @@ export const authOptions = {
     async signIn({ user: { email } }: any) {
       try {
         await faunadb.query(
-          Create(Collection("users"), {
-            data: {
-              email,
-            },
-          })
+          If(
+            Not(Exists(Match(Index("user.by.email"), Casefold(email)))),
+
+            Create(Collection("users"), {
+              data: {
+                email,
+              },
+            }),
+
+            Get(Match(Index("user.by.email"), Casefold(email)))
+          )
         );
 
         return true;
