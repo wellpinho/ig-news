@@ -18,14 +18,19 @@ export const authOptions = {
 
   callbacks: {
     async signIn({ user: { email } }: any) {
-      await faunadb.query(
-        Create(Collection("users"), {
-          data: {
-            email,
-          },
-        })
-      );
-      return true;
+      try {
+        await faunadb.query(
+          Create(Collection("users"), {
+            data: {
+              email,
+            },
+          })
+        );
+
+        return true;
+      } catch (error) {
+        return false;
+      }
     },
   },
 };
