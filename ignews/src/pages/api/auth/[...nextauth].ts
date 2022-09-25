@@ -8,6 +8,8 @@ import {
   Index,
   Casefold,
   Get,
+  Select,
+  Intersection,
 } from "faunadb";
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
@@ -27,6 +29,34 @@ export const authOptions = {
   ],
 
   callbacks: {
+    async session({ session }) {
+      session.user.email;
+
+      try {
+        const userActiveSubscription = await faunadb.query(
+          Get(
+            Intersection([
+              Match(
+                Index("subscription_by_user_ref"),
+                Select(
+                  "ref",
+                  Get(
+                    Match(Index("user.by.email"), Casefold(session.user.email))
+                  )
+                )
+              ),
+              Index("subscription_by_status"),
+              "active",
+            ])
+          )
+        );
+
+        return { ...session, activeSubscription: userActiveSubscription };
+      } catch {
+        return { ...session, activeSubscription: null };
+      }
+    },
+
     async signIn({ user: { email } }: any) {
       try {
         await faunadb.query(

@@ -5,6 +5,7 @@ import { getPrismicClient } from "../../services/prismic";
 import Head from "next/head";
 import styles from "./posts.module.scss";
 import moment from "moment";
+import Link from "next/link";
 
 type Post = {
   slug: string;
@@ -27,11 +28,13 @@ const Posts = ({ posts }: IPosts) => {
         <div className={styles.posts}>
           {posts.map((post) => {
             return (
-              <a href="#" key={post.slug}>
-                <time>{post.updatedAt}</time>
-                <strong>{post.title}</strong>
-                <p>{post.excerpt}</p>
-              </a>
+              <Link href={`/posts/${post.slug}`} key={post.slug}>
+                <a>
+                  <time>{post.updatedAt}</time>
+                  <strong>{post.title}</strong>
+                  <p>{post.excerpt}</p>
+                </a>
+              </Link>
             );
           })}
         </div>
