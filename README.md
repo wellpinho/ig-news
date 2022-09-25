@@ -8,3 +8,16 @@ React and NextJs
 2. `cd projetct-name && yarn dev`
 3. `yarn add @types/react @types/node -D`
 4. `yarn add sass`
+
+## CMS
+
+Prismic CMS
+
+## blog
+
+keystone (landpage, tem um editor muito bom)
+
+## ecommerce
+
+Shopfy
+Saleor
